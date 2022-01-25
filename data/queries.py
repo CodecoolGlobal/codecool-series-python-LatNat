@@ -32,18 +32,24 @@ def get_show_by_id(show_id):
                 shows.title,
                 shows.runtime,
                 ROUND( rating, 1) as rating,
-                STRING_AGG( name, ',' ORDER BY name) genres,
+                STRING_AGG( DISTINCT g.name, ',' ORDER BY g.name) genres,
                 COALESCE( shows.trailer, 'No URL' ) as trailer,
-                COALESCE( shows.homepage, 'No URL' ) as homepage
+                COALESCE( shows.homepage, 'No URL' ) as homepage,
+                shows.overview,
+                STRING_AGG( DISTINCT stars.name, ', ' ) as stars
             FROM shows
+            INNER JOIN (
+                SELECT actors.id, actors.name, sc.show_id
+                FROM actors
+                INNER JOIN show_characters sc on actors.id = sc.actor_id
+                ORDER BY sc.id
+                FETCH FIRST 3 ROWS ONLY
+                ) as stars
+                ON show_id = shows.id
+            INNER JOIN show_characters sc on shows.id = sc.show_id
             INNER JOIN show_genres sg on shows.id = sg.show_id
             INNER JOIN genres g on sg.genre_id = g.id
             WHERE shows.id = %(show_id)s
-            GROUP BY  title,  runtime, rating, trailer, homepage
-            ORDER BY shows.rating DESC
-            LIMIT 15;
+            GROUP BY title,  runtime, rating, trailer, homepage, overview;
             '''
-    return data_manager.execute_select('SELECT title; FROM shows', variables={'title': 'Codecool'})
-
-# tle, average runtime length, rating, genres (in the same way as in the shows list),
-# overview, and the name of the top three actors appearing in the show.
+    return data_manager.execute_select(query, variables={'show_id': show_id}, fetchall=False)

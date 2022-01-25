@@ -1,0 +1,6 @@
+{% extends 'layout.html' %}
+{% block content %}
+    {% for key, value in show.items() %}
+        <p>{{ value }}</p>
+    {% endfor %}
+{% endblock %}
