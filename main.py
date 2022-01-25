@@ -16,13 +16,14 @@ def index():
 def design():
     return render_template('design.html')
 
+
 @app.route('/shows/most-rated')
 def most_rated():
-    return render_template('design.html')
+    return render_template('list.html')
 
 
 def main():
-    app.run(debug=False)
+    app.run(debug=True)
 
 
 if __name__ == '__main__':
