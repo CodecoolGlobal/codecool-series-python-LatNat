@@ -7,13 +7,13 @@
         Top-rated shows:
         <table>
             <thead>
-                <tr>
-                    {% for key in shows[0] %}
-                        {% if key != 'id' %}
-                            <th>{{ key }}</th>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
+            <tr>
+                {% for key in shows[0] %}
+                    {% if key != 'id' %}
+                        <th>{{ key }}</th>
+                    {% endif %}
+                {% endfor %}
+            </tr>
             </thead>
             <tbody>
             {% for show in shows %}
@@ -24,8 +24,10 @@
                                 <td><a>{{ value }}</a></td>
                             {% elif key == 'title' %}
                                 <td><a href="{{ url_for('get_show', show_id=show.id) }}">{{ value }}</a></td>
-                            {% else %}
+                            {% elif value == 'No URL' %}
                                 <td>{{ value }}</td>
+                            {% else %}
+                                <td class="text-center">{{ value }}</td>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
