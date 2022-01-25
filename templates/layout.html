@@ -31,6 +31,26 @@
 </head>
 
 <body>
+<div id="body-wrapper">
+{% block header %}    <header class="clearfix">
+        <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
+        <span id="header-title" class="title">Codecool Series DB</span>
+        <div id="header-auth">
+            <button type="button" id="bt-register">Register</button>
+            <button type="button" id="bt-login">Login</button>
+        </div>
+    </header>
+{% endblock %}
 {% block content %}{% endblock %}
+{% block footer %}
+<footer>
+    Copyright, bla-bla
+</footer>
+{% endblock %}
+<div class="background">
+    <div class="dark-blue-layer"></div>
+    <div class="light-blue-layer"></div>
+</div>
+</div>
 </body>
 </html>
