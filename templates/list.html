@@ -13,15 +13,17 @@
                         {% endif %}
                     {% endfor %}
                 </tr>
-{#            <tr>#}
-{#                <th>a</th>#}
-{#                <th>b</th>#}
-{#                <th>c</th>#}
-{#                <th>d</th>#}
-{#                <th class="action-column">e</th>#}
-{#            </tr>#}
             </thead>
             <tbody>
+            {% for show in shows %}
+                <tr>
+                    {% for key, value in show %}
+                        {% if %}
+                        {% else %}
+                        <td>{{ value }}</td>
+                        {% endif %}
+                </tr>
+            {% endfor %}
             <tr>
                 <td>Lorem</td>
                 <td>Ipsum</td>
