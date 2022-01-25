@@ -17,7 +17,11 @@
             {% for show in shows %}
                 <tr>
                     {% for key, value in show.items() %}
-                        <td>{{ value }}</td>
+                        {% if key in ['trailer', 'homepage'] and value != 'No URL' %}
+                            <td><a>{{ value }}</a></td>
+                        {% else %}
+                            <td>{{ value }}</td>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             {% endfor %}
