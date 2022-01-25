@@ -4,12 +4,14 @@
 
 {% block content %}
     <div class="card">
-        Top rated shows:
+        Top-rated shows:
         <table>
             <thead>
                 <tr>
                     {% for key in shows[0] %}
-                        <th>{{ key }}</th>
+                        {% if key != 'id' %}
+                            <th>{{ key }}</th>
+                        {% endif %}
                     {% endfor %}
                 </tr>
             </thead>
@@ -17,10 +19,14 @@
             {% for show in shows %}
                 <tr>
                     {% for key, value in show.items() %}
-                        {% if key in ['trailer', 'homepage'] and value != 'No URL' %}
-                            <td><a>{{ value }}</a></td>
-                        {% else %}
-                            <td>{{ value }}</td>
+                        {% if key != 'id' %}
+                            {% if key in ['trailer', 'homepage'] and value != 'No URL' %}
+                                <td><a>{{ value }}</a></td>
+                            {% else if key == 'title' %}
+                                <td><a href="{{ url_for('show', show_id=show.id) }}">{{ value }}</a></td>
+                            {% else %}
+                                <td>{{ value }}</td>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </tr>
