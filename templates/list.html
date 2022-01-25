@@ -6,74 +6,18 @@
             <thead>
                 <tr>
                     {% for key in shows[0] %}
-                        {% if key == 'trailer' %}
-                            <th class="action-column">{{ key }}</th>
-                        {% else %}
-                            <th>{{ key }}</th>
-                        {% endif %}
+                        <th>{{ key }}</th>
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
             {% for show in shows %}
                 <tr>
-                    {% for key, value in show %}
-                        {% if %}
-                        {% else %}
+                    {% for key, value in show.items() %}
                         <td>{{ value }}</td>
-                        {% endif %}
+                    {% endfor %}
                 </tr>
             {% endfor %}
-            <tr>
-                <td>Lorem</td>
-                <td>Ipsum</td>
-                <td>Dolor</td>
-                <td>Sit amet</td>
-                <td class="action-column">
-                    <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                    <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Lorem</td>
-                <td>Ipsum</td>
-                <td>Dolor</td>
-                <td>Sit amet</td>
-                <td class="action-column">
-                    <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                    <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Lorem</td>
-                <td>Ipsum</td>
-                <td>Dolor</td>
-                <td>Sit amet</td>
-                <td class="action-column">
-                    <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                    <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Lorem</td>
-                <td>Ipsum</td>
-                <td>Dolor</td>
-                <td>Sit amet</td>
-                <td class="action-column">
-                    <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                    <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Lorem</td>
-                <td>Ipsum</td>
-                <td>Dolor</td>
-                <td>Sit amet</td>
-                <td class="action-column">
-                    <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                    <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                </td>
-            </tr>
             </tbody>
         </table>
     </div>

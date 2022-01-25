@@ -19,6 +19,7 @@ def get_top_rated():
         INNER JOIN show_genres sg on shows.id = sg.show_id
         INNER JOIN genres g on sg.genre_id = g.id
         GROUP BY  title, year, runtime, rating, trailer, homepage
-        ORDER BY shows.rating DESC;
+        ORDER BY shows.rating DESC
+        LIMIT 15;
         '''
     return data_manager.execute_select(query)
