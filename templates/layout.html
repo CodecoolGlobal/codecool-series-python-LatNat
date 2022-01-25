@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<div id="body-wrapper">
+    <div id="body-wrapper">
 {% block header %}
     <header class="clearfix">
         <img id="header-logo" src="{{ url_for('static', filename='assets/codecool-logo.png') }}" alt="Codecool Logo">
@@ -42,18 +42,31 @@
         </div>
     </header>
 {% endblock %}
-{% block content %}{% endblock %}
-{% block footer %}
-<footer>
-    Copyright, bla-bla
-</footer>
+    <section>
+{% block breadcrumbs %}
+    <nav class="breadcrumb">
+        <a href="#">Game of Thrones</a>
+        <span class="separator">&gt;</span>
+        <a href="#">Season 3</a>
+        <span class="separator">&gt;</span>
+        <a href="#">Episode 8</a>
+    </nav>
 {% endblock %}
-</div>
+    <h1 class="title text-center">{% block page_title %}{% endblock %}</h1>
+{% block content %}
+{% endblock %}
+    </section>
+{% block footer %}
+    <footer>
+        Copyright, bla-bla
+    </footer>
+{% endblock %}
+    </div>
 {% block background %}
-<div class="background">
-    <div class="dark-blue-layer"></div>
-    <div class="light-blue-layer"></div>
-</div>
+    <div class="background">
+        <div class="dark-blue-layer"></div>
+        <div class="light-blue-layer"></div>
+    </div>
 {% endblock %}
 </body>
 </html>

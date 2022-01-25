@@ -12,7 +12,7 @@ def get_top_rated():
            shows.year,
            shows.runtime,
            ROUND( rating, 1 ),
-           STRING_AGG( name, ',' ORDER BY name ) genres,
+           STRING_AGG( name, ', ' ORDER BY name ) genres,
            COALESCE( shows.trailer, 'No URL' ) as trailer,
            COALESCE( shows.homepage, 'No URL' ) as homepage
         FROM shows
