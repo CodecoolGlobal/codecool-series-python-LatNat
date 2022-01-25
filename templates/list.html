@@ -1,16 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div class="card">
-        This is an example for a table:
+        Top rated shows:
         <table>
             <thead>
-            <tr>
-                <th>a</th>
-                <th>b</th>
-                <th>c</th>
-                <th>d</th>
-                <th class="action-column">e</th>
-            </tr>
+                <tr>
+                    {% for key in shows[0] %}
+                        {% if key == 'trailer' %}
+                            <th class="action-column">{{ key }}</th>
+                        {% else %}
+                            <th>{{ key }}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+{#            <tr>#}
+{#                <th>a</th>#}
+{#                <th>b</th>#}
+{#                <th>c</th>#}
+{#                <th>d</th>#}
+{#                <th class="action-column">e</th>#}
+{#            </tr>#}
             </thead>
             <tbody>
             <tr>

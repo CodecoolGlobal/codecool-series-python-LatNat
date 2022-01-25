@@ -13,7 +13,7 @@ def get_top_rated():
            shows.runtime,
            ROUND( rating, 1),
            STRING_AGG( name, ',' ORDER BY name) genres,
-           COALESCE( shows.trailer, 'No URL' )
+           COALESCE( shows.trailer, 'No URL' ) as trailer
         FROM shows
         INNER JOIN show_genres sg on shows.id = sg.show_id
         INNER JOIN genres g on sg.genre_id = g.id

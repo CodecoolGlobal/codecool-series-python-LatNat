@@ -20,8 +20,8 @@ def design():
 
 @app.route('/shows/top-rated')
 def top_rated():
-    print('why')
-    return render_template('list.html')
+    shows = queries.get_top_rated()
+    return render_template('list.html', shows=shows)
 
 
 def main():
