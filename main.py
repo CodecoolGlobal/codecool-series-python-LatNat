@@ -24,6 +24,11 @@ def top_rated():
     return render_template('list.html', shows=shows)
 
 
+@app.route('/shows/<show_id>')
+def get_show(show_id):
+    return render_template('index.html')
+
+
 def main():
     app.run(debug=True)
 

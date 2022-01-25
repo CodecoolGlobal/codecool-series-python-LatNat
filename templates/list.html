@@ -22,8 +22,8 @@
                         {% if key != 'id' %}
                             {% if key in ['trailer', 'homepage'] and value != 'No URL' %}
                                 <td><a>{{ value }}</a></td>
-                            {% else if key == 'title' %}
-                                <td><a href="{{ url_for('show', show_id=show.id) }}">{{ value }}</a></td>
+                            {% elif key == 'title' %}
+                                <td><a href="{{ url_for('get_show', show_id=show.id) }}">{{ value }}</a></td>
                             {% else %}
                                 <td>{{ value }}</td>
                             {% endif %}
@@ -34,4 +34,6 @@
             </tbody>
         </table>
     </div>
+
+    <h3 class="title text-center"><a><<</a> <a>1</a> <a>2</a> <a>3</a> <a>4</a> <a>5</a> <a>>></a></h3>
 {% endblock %}
