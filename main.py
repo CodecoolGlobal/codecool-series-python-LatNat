@@ -18,10 +18,12 @@ def design():
     return render_template('design.html')
 
 
-@app.route('/shows/top-rated')
-def top_rated():
-    shows = queries.get_top_rated()
-    return render_template('list.html', shows=shows)
+@app.route('/shows/top-rated/')
+@app.route('/shows/top-rated/<page>')
+def top_rated(page=1):
+    shows = queries.get_top_rated(page)
+    page_count = math.ceil(queries.get_show_count()['count'] / 15)
+    return render_template('list.html', shows=shows, page_count=page_count)
 
 
 @app.route('/shows/<show_id>')
@@ -32,13 +34,12 @@ def get_show(show_id):
 
 @app.template_filter('convert_runtime')
 def convert_runtime(runtime):
-    return runtime
-    # if runtime < 60:
-    #     return runtime + ' s'
-    # else:
-    #     hours = f'{runtime//60} h' if runtime // 60 > 0 else ''
-    #     minutes = f'{runtime % 60} s' if runtime % 60 > 0 else ''
-    #     return hours + minutes
+    if runtime < 60:
+        return f'{runtime} m'
+    else:
+        hours = f'{runtime//60} h' if runtime // 60 > 0 else ''
+        minutes = f'{runtime % 60} m' if runtime % 60 > 0 else ''
+        return hours + minutes
 
 
 @app.template_filter('get_video_id')
