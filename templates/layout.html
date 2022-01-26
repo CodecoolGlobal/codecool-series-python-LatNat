@@ -44,15 +44,10 @@
     </header>
 {% endblock %}
     <section>
-{% block breadcrumbs %}
-    <nav class="breadcrumb">
-        <a href="#">Game of Thrones</a>
-        <span class="separator">&gt;</span>
-        <a href="#">Season 3</a>
-        <span class="separator">&gt;</span>
-        <a href="#">Episode 8</a>
-    </nav>
-{% endblock %}
+        <nav class="breadcrumb">
+            <a href="{{ url_for('index') }}">Main</a>
+            {% block breadcrumbs %}{% endblock %}
+        </nav>
     <h1 class="title text-center">{% block page_title %}{% endblock %}</h1>
 {% block content %}
 {% endblock %}

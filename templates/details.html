@@ -1,4 +1,10 @@
 {% extends 'layout.html' %}
+{% block breadcrumbs %}
+    <span class="separator">&gt;</span>
+    <a>Shows</a>
+    <span class="separator">&gt;</span>
+    <a>{{ show['title'] }}</a>
+{% endblock %}
 {% block content %}
     <div class="card detailed-view">
         <p>Details:</p>
@@ -27,13 +33,77 @@
     </div>
     <div class="card row">
         <div class="row">
+        <div class="col col-twothird">
+                <p>Seasons:</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>c</th>
+                        <th>d</th>
+                        <th class="action-column">e</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Lorem</td>
+                        <td>Ipsum</td>
+                        <td>Dolor</td>
+                        <td>Sit amet</td>
+                        <td class="action-column">
+                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
+                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lorem</td>
+                        <td>Ipsum</td>
+                        <td>Dolor</td>
+                        <td>Sit amet</td>
+                        <td class="action-column">
+                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
+                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lorem</td>
+                        <td>Ipsum</td>
+                        <td>Dolor</td>
+                        <td>Sit amet</td>
+                        <td class="action-column">
+                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
+                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lorem</td>
+                        <td>Ipsum</td>
+                        <td>Dolor</td>
+                        <td>Sit amet</td>
+                        <td class="action-column">
+                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
+                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lorem</td>
+                        <td>Ipsum</td>
+                        <td>Dolor</td>
+                        <td>Sit amet</td>
+                        <td class="action-column">
+                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
+                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             {% if show['trailer'] != 'No URL' %}
                 <div id="player" class="trailer col col-third" data-video-id="{{ show['trailer'] | get_video_id }}"></div>
                 <script src="{{ url_for('static', filename='js/embed-youtube.js') }}" defer></script>
             {% endif %}
-            <div class="col col-twothird">
-                <p>Seasons:</p>
-            </div>
+
         </div>
     </div>
 {% endblock %}
