@@ -25,8 +25,15 @@
             </p>
         </div>
     </div>
-    {% if show['trailer'] != 'No URL' %}
-        <div id="player" class="card" data-video-id="{{ show['trailer'] | get_video_id }}"></div>
-        <script src="{{ url_for('static', filename='js/embed-youtube.js') }}" defer></script>
-    {% endif %}
+    <div class="card">
+    <div class="row">
+        {% if show['trailer'] != 'No URL' %}
+            <div id="player" class="trailer col col-third" data-video-id="{{ show['trailer'] | get_video_id }}"></div>
+            <script src="{{ url_for('static', filename='js/embed-youtube.js') }}" defer></script>
+        {% endif %}
+        <div class="col col-twothird">
+            <p>Seasons:</p>
+        </div>
+    </div>
+    </div>
 {% endblock %}
