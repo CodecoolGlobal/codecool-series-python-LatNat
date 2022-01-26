@@ -32,9 +32,13 @@ def get_show(show_id):
 
 @app.template_filter('convert_runtime')
 def convert_runtime(runtime):
-    hours = f'{runtime//60} h' if runtime // 60 > 0 else ''
-    minutes = f'{runtime % 60} s' if runtime % 60 > 0 else ''
-    return hours + minutes
+    return runtime
+    # if runtime < 60:
+    #     return runtime + ' s'
+    # else:
+    #     hours = f'{runtime//60} h' if runtime // 60 > 0 else ''
+    #     minutes = f'{runtime % 60} s' if runtime % 60 > 0 else ''
+    #     return hours + minutes
 
 
 @app.template_filter('get_video_id')

@@ -21,35 +21,37 @@ def get_top_rated():
             INNER JOIN genres g on sg.genre_id = g.id
             GROUP BY  shows.id, title, year, runtime, rating, trailer, homepage
             ORDER BY shows.rating DESC
-            LIMIT 15;
+            FETCH FIRST 15 ROWS ONLY;
         '''
     return data_manager.execute_select(query)
 
 
 def get_show_by_id(show_id):
     query = '''
-            SELECT
-                shows.title,
-                shows.runtime,
-                ROUND( rating, 1) as rating,
-                STRING_AGG( DISTINCT g.name, ',' ORDER BY g.name) genres,
-                COALESCE( shows.trailer, 'No URL' ) as trailer,
-                COALESCE( shows.homepage, 'No URL' ) as homepage,
-                shows.overview,
-                STRING_AGG( DISTINCT stars.name, ', ' ) as stars
-            FROM shows
-            INNER JOIN (
-                SELECT actors.id, actors.name, sc.show_id
-                FROM actors
-                INNER JOIN show_characters sc on actors.id = sc.actor_id
-                ORDER BY sc.id
-                FETCH FIRST 3 ROWS ONLY
-                ) as stars
-                ON show_id = shows.id
-            INNER JOIN show_characters sc on shows.id = sc.show_id
-            INNER JOIN show_genres sg on shows.id = sg.show_id
-            INNER JOIN genres g on sg.genre_id = g.id
-            WHERE shows.id = %(show_id)s
-            GROUP BY title,  runtime, rating, trailer, homepage, overview;
+        SELECT title,
+               runtime,
+               round(rating, 1) as rating,
+               genre_info.genres as genres,
+               overview,
+               string_agg(stars.name, ',') as stars,
+               coalesce(trailer, 'No URL') as trailer
+        FROM shows
+        JOIN (
+            SELECT show_id, string_agg(genres.name, ',') as genres
+            FROM genres
+            JOIN show_genres sg on genres.id = sg.genre_id
+            GROUP BY show_id
+            ) as genre_info on shows.id = genre_info.show_id
+        JOIN (
+            SELECT show_id, name
+            FROM actors
+            JOIN show_characters sc on actors.id = sc.actor_id
+            WHERE show_id = %(show_id)s
+            GROUP BY show_id, name, sc.id
+            ORDER BY sc.id
+            FETCH FIRST 3 ROWS ONLY
+            ) as stars on stars.show_id = shows.id
+        GROUP BY shows.id, shows.title, shows.runtime, shows.rating, genre_info.genres, shows.overview, shows.trailer
+        ORDER BY rating DESC;
             '''
     return data_manager.execute_select(query, variables={'show_id': show_id}, fetchall=False)

@@ -12,14 +12,16 @@
         </div>
         <div>
             <p>
+                {% if show['stars'] %}
                 <b>Stars:</b>
-                {% for index in range(show['stars'].split(',')|length) %}
-                    {% if index == 2 %}
-                        <a href="#">{{ show['stars'].split(',')[index] }}</a>
-                    {% else %}
-                        <a href="#">{{ show['stars'].split(',')[index] }}</a>,
-                    {% endif %}
+                    {% for index in range(show['stars'].split(',')|length) %}
+                        {% if index == (show['stars'].split(',')|length)-1 %}
+                            <a href="#">{{ show['stars'].split(',')[index] }}</a>
+                        {% else %}
+                            <a href="#">{{ show['stars'].split(',')[index] }}</a>,
+                        {% endif %}
                     {% endfor %}
+                {% endif %}
             </p>
         </div>
     </div>
