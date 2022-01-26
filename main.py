@@ -30,6 +30,19 @@ def get_show(show_id):
     return render_template('details.html', show=show)
 
 
+@app.template_filter('convert_runtime')
+def convert_runtime(runtime):
+    hours = f'{runtime//60} h' if runtime // 60 > 0 else ''
+    minutes = f'{runtime % 60} s' if runtime % 60 > 0 else ''
+    return hours + minutes
+
+
+@app.template_filter('get_video_id')
+def get_video_id(url):
+    video_id = url[-11:]
+    return video_id
+
+
 def main():
     app.run(debug=True)
 

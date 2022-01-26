@@ -1,27 +1,30 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div class="card detailed-view">
-            <p>Details:</p>
-            <div class="row">
-                <img src="http://www.impawards.com/2016/posters/deadpool_ver5.jpg" alt="Deadpool poster"
-                     class="poster col col-third">
-                <div class="col col-twothird">
-                    <h2>{{ show['title'] }}<span class="separator"> </span>{{ show['rating'] }} ☆</h2>
-                    <p class="small grayed">{{ show['runtime'] }}<span class="separator">|</span>{{ show['genres'] }}</p>
-                    <p>{{ show['overview']}}</p>
-                </div>
-            </div>
-            <div>
-                <p>
-                    <b>Stars:</b>
-                    {% for index in range(show['stars'].split(',')|length) %}
-                        {% if ((show['stars'].split(',')|length)-1) == index %}
-                            <a href="#">{{ show['stars'].split(',')[index] }}</a>
-                        {% else %}
-                            <a href="#">{{ show['stars'].split(',')[index] }}</a>,
-                        {% endif %}
-                    {% endfor %}
-                </p>
+        <p>Details:</p>
+        <div class="row">
+            <img src="#" alt="{{ show['title'] }} poster" class="poster col col-third">
+            <div class="col col-twothird">
+                <h2>{{ show['title'] }}<span class="separator"> </span>{{ show['rating'] }} ★</h2>
+                <p class="small grayed">{{ show['runtime']|convert_runtime }}<span class="separator">|</span>{{ show['genres'] }}</p>
+                <p>{{ show['overview']}}</p>
             </div>
         </div>
+        <div>
+            <p>
+                <b>Stars:</b>
+                {% for index in range(show['stars'].split(',')|length) %}
+                    {% if index == 2 %}
+                        <a href="#">{{ show['stars'].split(',')[index] }}</a>
+                    {% else %}
+                        <a href="#">{{ show['stars'].split(',')[index] }}</a>,
+                    {% endif %}
+                    {% endfor %}
+            </p>
+        </div>
+    </div>
+    {% if show['trailer'] != 'No URL' %}
+        <div id="player" class="card" data-video-id="{{ show['trailer'] | get_video_id }}"></div>
+        <script src="{{ url_for('static', filename='js/embed-youtube.js') }}" defer></script>
+    {% endif %}
 {% endblock %}
