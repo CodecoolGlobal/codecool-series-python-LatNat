@@ -22,8 +22,8 @@ def design():
 @app.route('/shows/top-rated/<page>')
 def top_rated(page=1):
     shows = queries.get_top_rated(page)
-    page_count = math.ceil(queries.get_show_count()['count'] / 15)
-    return render_template('list.html', shows=shows, page_count=page_count)
+    page_count = math.floor(queries.get_show_count()['count'] / 15)
+    return render_template('list.html', shows=shows, page_count=page_count, current_page=int(page))
 
 
 @app.route('/shows/<show_id>')

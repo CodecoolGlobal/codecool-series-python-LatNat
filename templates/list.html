@@ -38,11 +38,11 @@
     </div>
 
     <div class="card pagination text-center">
-        <a>«</a>
-        {% for page_number in range(1, page_count+1) %}
+        <a href="{{ url_for('top_rated', page=current_page-1) }}">«</a>
+        {% for page_number in range(1, page_count) %}
         <a href="{{ url_for('top_rated', page=page_number) }}">{{ page_number }}</a>
         {% endfor %}
-        <a>»</a>
+        <a href="{{ url_for('top_rated', page=current_page+1) }}">»</a>
     </div>
 
 {% endblock %}

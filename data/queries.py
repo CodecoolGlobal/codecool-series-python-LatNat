@@ -25,7 +25,7 @@ def get_top_rated(page):
         OFFSET (%(page)s - 1) * 15;
 
         '''
-    return data_manager.execute_select(query, variables={ 'page': page })
+    return data_manager.execute_select(query, variables={'page': page})
 
 
 def get_show_by_id(show_id):
