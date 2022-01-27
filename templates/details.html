@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block breadcrumbs %}
     <span class="separator">&gt;</span>
-    <a>Shows</a>
+    <a href="{{ url_for('all_shows') }}">Shows</a>
     <span class="separator">&gt;</span>
     <a>{{ show['title'] }}</a>
 {% endblock %}
@@ -33,7 +33,7 @@
     </div>
     <div class="card row">
         <div class="row">
-        <div class="col col-twothird">
+            <div class="col col-twothird">
                 <p>Seasons:</p>
                 <table>
                     <thead>
@@ -42,7 +42,6 @@
                         <th>b</th>
                         <th>c</th>
                         <th>d</th>
-                        <th class="action-column">e</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,50 +50,18 @@
                         <td>Ipsum</td>
                         <td>Dolor</td>
                         <td>Sit amet</td>
-                        <td class="action-column">
-                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                        </td>
                     </tr>
                     <tr>
                         <td>Lorem</td>
                         <td>Ipsum</td>
                         <td>Dolor</td>
                         <td>Sit amet</td>
-                        <td class="action-column">
-                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                        </td>
                     </tr>
                     <tr>
                         <td>Lorem</td>
                         <td>Ipsum</td>
                         <td>Dolor</td>
                         <td>Sit amet</td>
-                        <td class="action-column">
-                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lorem</td>
-                        <td>Ipsum</td>
-                        <td>Dolor</td>
-                        <td>Sit amet</td>
-                        <td class="action-column">
-                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lorem</td>
-                        <td>Ipsum</td>
-                        <td>Dolor</td>
-                        <td>Sit amet</td>
-                        <td class="action-column">
-                            <button type="button" class="icon-button"><i class="fa fa-edit fa-fw"></i></button>
-                            <button type="button" class="icon-button"><i class="fa fa-trash fa-fw"></i></button>
-                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -103,7 +70,6 @@
                 <div id="player" class="trailer col col-third" data-video-id="{{ show['trailer'] | get_video_id }}"></div>
                 <script src="{{ url_for('static', filename='js/embed-youtube.js') }}" defer></script>
             {% endif %}
-
         </div>
     </div>
 {% endblock %}
