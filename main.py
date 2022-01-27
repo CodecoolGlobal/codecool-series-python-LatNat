@@ -30,6 +30,7 @@ def design():
 def top_rated(page=1):
     shows = queries.get_top_rated(page)
     page_count = math.floor(queries.get_show_count()['count'] / 15)
+    print(page_count)
     return render_template('list.html', shows=shows, page_count=page_count, current_page=int(page))
 
 
