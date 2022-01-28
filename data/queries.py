@@ -2,7 +2,8 @@ from data import data_manager
 from psycopg2 import sql
 
 
-def get_shows(category='title', order='ASC'):
+def get_shows(category, order):
+    print('inside queries:', category, order)
     query = sql.SQL('''
         SELECT
             shows.id,
@@ -21,8 +22,7 @@ def get_shows(category='title', order='ASC'):
         ''')
     return data_manager.execute_select(query.format(
         category=sql.Identifier(category),
-        order=sql.SQL(order),
-        ))
+        order=sql.SQL(order),))
 
 
 def get_top_rated(page, category='rating', order='DESC'):
@@ -43,13 +43,11 @@ def get_top_rated(page, category='rating', order='DESC'):
         ORDER BY {category} {order}
         LIMIT 15
         OFFSET ({page} - 1) * 15;
-
         ''')
     return data_manager.execute_select(query.format(
         page=sql.Literal(page),
         category=sql.Identifier(category),
-        order=sql.SQL(order),
-        ))
+        order=sql.SQL(order),))
 
 
 def get_show_by_id(show_id):

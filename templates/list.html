@@ -29,7 +29,14 @@
             <tr>
                 {% for key in shows[0] %}
                     {% if key != 'id' %}
-                        <th>{{ key }}</th>
+                        <th>
+                            <a href="{{ url_for('all_shows', category=key, order=direction|flip_direction) if view_all else url_for('top_rated', category=key, order=direction|flip_direction) }}">
+                                {{ key }}
+                            {% if key == order %}
+                                {{ direction | convert_direction_to_arrow }}
+                            {% endif %}
+                            </a>
+                        </th>
                     {% endif %}
                 {% endfor %}
             </tr>
