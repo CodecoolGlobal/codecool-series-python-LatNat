@@ -16,7 +16,7 @@ def index():
 @app.route('/shows/')
 def all_shows():
     shows = queries.get_shows()
-    return render_template('shows.html', shows=shows)
+    return render_template('list.html', shows=shows, view_all=True)
 
 
 @app.route('/design')

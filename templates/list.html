@@ -1,15 +1,29 @@
 {% extends 'layout.html' %}
+
 {% block breadcrumbs %}
     <span class="separator">></span>
     <a href="{{ url_for('all_shows') }}">Shows</a>
-    <span class="separator">&gt;</span>
-    <a>Top-rated</a>
+    {% if not view_all %}
+        <span class="separator">&gt;</span>
+        <a>Top-rated</a>
+    {% endif %}
 {% endblock %}
-{% block page_title %}Top-rated shows{% endblock %}
+
+{% block page_title %}
+    {% if view_all %}
+        All shows
+    {% else %}
+        Top-rated shows
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <div class="card">
-        Top-rated shows:
+        {% if view_all %}
+            All shows:
+        {% else %}
+            Top-rated shows:
+        {% endif %}
         <table>
             <thead>
             <tr>
@@ -41,17 +55,12 @@
             </tbody>
         </table>
     </div>
-    <div class="pagination text-center">
-        <script>
-            console.log('hello! current page is:', {{ current_page }})
-            createPagination({{ current_page }}, {{ page_count }}, 'top_rated')
-            console.log('yay!')
-        </script>
-{#        <a href="{{ url_for('top_rated', page=current_page-1) }}">«</a>#}
-{#        {% for page_number in range(1, page_count) %}#}
-{#        <a href="{{ url_for('top_rated', page=page_number) }}">{{ page_number }}</a>#}
-{#        {% endfor %}#}
-{#        <a href="{{ url_for('top_rated', page=current_page+1) }}">»</a>#}
-    </div>
+    {% if not view_all %}
+        <div class="pagination text-center">
+            <script>
+                createPagination({{ current_page }}, {{ page_count }}, 'top_rated')
+            </script>
+        </div>
+    {% endif %}
 
 {% endblock %}
