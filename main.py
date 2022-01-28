@@ -45,7 +45,14 @@ def top_rated(page=1):
 @app.route('/show/<show_id>')
 def get_show(show_id):
     show = queries.get_show_by_id(show_id)
-    return render_template('details.html', show=show)
+    seasons = queries.get_seasons_for_show(show_id)
+    return render_template('details.html', show=show, seasons=seasons)
+
+
+@app.route('/actors')
+def get_first_hundred_actors():
+    actors = queries.get_actors()
+    return render_template('actors.html', actors=actors)
 
 
 @app.template_filter('convert_runtime')
@@ -67,9 +74,9 @@ def get_video_id(url):
 @app.template_filter('convert_direction_to_arrow')
 def convert(direction):
     if direction == 'ASC':
-        return '▲'
+        return '⇧'
     else:
-        return '▼'
+        return '⇩'
 
 
 @app.template_filter('flip_direction')

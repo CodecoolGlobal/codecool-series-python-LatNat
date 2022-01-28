@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}
+    Actors
+{% endblock %}
+
+{% block breadcrumbs %}
+    <span class="separator">></span>
+    <a>Actors</a>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        {% for actor in actors %}
+        <tr>
+            <td>
+                <details>
+                <summary>{{ actor.first_name }}</summary>
+                <p>
+                    {{ actor.shows }}
+                </p>
+                </details>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

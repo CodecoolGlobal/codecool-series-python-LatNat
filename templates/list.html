@@ -10,20 +10,12 @@
 {% endblock %}
 
 {% block page_title %}
-    {% if view_all %}
-        All shows
-    {% else %}
-        Top-rated shows
-    {% endif %}
+    {{ 'All shows' if view_all else 'Top-rated shows' }}
 {% endblock %}
 
 {% block content %}
     <div class="card">
-        {% if view_all %}
-            All shows:
-        {% else %}
-            Top-rated shows:
-        {% endif %}
+        {{ 'All shows:' if view_all else 'Top-rated shows:' }}
         <table>
             <thead>
             <tr>

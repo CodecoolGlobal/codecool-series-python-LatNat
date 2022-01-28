@@ -22,7 +22,7 @@ def get_shows(category, order):
         ''')
     return data_manager.execute_select(query.format(
         category=sql.Identifier(category),
-        order=sql.SQL(order),))
+        order=sql.SQL(order)))
 
 
 def get_top_rated(page, category='rating', order='DESC'):
@@ -47,7 +47,7 @@ def get_top_rated(page, category='rating', order='DESC'):
     return data_manager.execute_select(query.format(
         page=sql.Literal(page),
         category=sql.Identifier(category),
-        order=sql.SQL(order),))
+        order=sql.SQL(order)))
 
 
 def get_show_by_id(show_id):
@@ -86,3 +86,25 @@ def get_show_count():
         SELECT count(id)
         FROM shows'''
     return data_manager.execute_select(query, fetchall=False)
+
+
+def get_seasons_for_show(show_id):
+    query = sql.SQL('''
+        SELECT season_number, title, overview FROM seasons
+        WHERE show_id = {show_id}
+        ORDER BY season_number;
+    ''')
+    return data_manager.execute_select(query.format(
+        show_id=sql.Literal(show_id)))
+
+
+def get_actors():
+    query = '''
+        SELECT split_part(actors.name,' ',1) as first_name, array_agg(s.title) as shows
+        FROM actors
+        JOIN show_characters sc on actors.id = sc.actor_id
+        JOIN shows s on s.id = sc.show_id
+        GROUP BY actors.name
+        LIMIT 100;
+    '''
+    return data_manager.execute_select(query)
