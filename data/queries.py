@@ -1,8 +1,32 @@
 from data import data_manager
+from psycopg2 import sql
 
 
-def get_shows():
-    query = '''
+def get_shows(category='title', order='ASC'):
+    query = sql.SQL('''
+        SELECT
+            shows.id,
+            shows.title as title,
+            shows.year,
+            shows.runtime,
+            ROUND( rating, 1 ) as rating,
+            STRING_AGG( name, ', ' ORDER BY name) genres,
+            COALESCE( shows.trailer, 'No URL' ) as trailer,
+            COALESCE( shows.homepage, 'No URL' ) as homepage
+        FROM shows
+        LEFT JOIN show_genres sg on shows.id = sg.show_id
+        LEFT JOIN genres g on sg.genre_id = g.id
+        GROUP BY  shows.id, title, year, runtime, rating, trailer, homepage
+        ORDER BY {category} {order};
+        ''')
+    return data_manager.execute_select(query.format(
+        category=sql.Identifier(category),
+        order=sql.SQL(order),
+        ))
+
+
+def get_top_rated(page, category='rating', order='DESC'):
+    query = sql.SQL('''
         SELECT
             shows.id,
             shows.title,
@@ -16,32 +40,16 @@ def get_shows():
         LEFT JOIN show_genres sg on shows.id = sg.show_id
         LEFT JOIN genres g on sg.genre_id = g.id
         GROUP BY  shows.id, title, year, runtime, rating, trailer, homepage
-        ORDER BY shows.title
-        '''
-    return data_manager.execute_select(query,)
-
-
-def get_top_rated(page):
-    query = '''
-        SELECT
-            shows.id,
-            shows.title,
-            shows.year,
-            shows.runtime,
-            ROUND( rating, 1 ) as rating,
-            STRING_AGG( name, ', ' ORDER BY name) genres,
-            COALESCE( shows.trailer, 'No URL' ) as trailer,
-            COALESCE( shows.homepage, 'No URL' ) as homepage
-        FROM shows
-        LEFT JOIN show_genres sg on shows.id = sg.show_id
-        LEFT JOIN genres g on sg.genre_id = g.id
-        GROUP BY  shows.id, title, year, runtime, rating, trailer, homepage
-        ORDER BY shows.rating DESC
+        ORDER BY {category} {order}
         LIMIT 15
-        OFFSET (%(page)s - 1) * 15;
+        OFFSET ({page} - 1) * 15;
 
-        '''
-    return data_manager.execute_select(query, variables={'page': page})
+        ''')
+    return data_manager.execute_select(query.format(
+        page=sql.Literal(page),
+        category=sql.Identifier(category),
+        order=sql.SQL(order),
+        ))
 
 
 def get_show_by_id(show_id):
