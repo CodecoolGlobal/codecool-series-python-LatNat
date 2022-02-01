@@ -21,9 +21,9 @@ function createImageTag() {
 }
 
 async function displayShowPoster() {
-    const posterPlace = await document.querySelector(".detailed-view img");
+    const posterPlace = await document.querySelector(".poster");
     const container = await document.querySelector(".detailed-view .row")
-    const show = posterPlace.alt
+    const show = posterPlace.dataset.showTitle;
     const imageTag = createImageTag();
     imageTag.src = await getPosterUrl(show);
     container.replaceChild(imageTag, posterPlace);

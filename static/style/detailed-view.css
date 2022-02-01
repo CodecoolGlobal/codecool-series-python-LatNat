@@ -2,3 +2,17 @@
     width: 20%;
     height: 40%;
 }
+.loader {
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    border: 6px solid rgb(227, 238, 255);
+    border-top: 6px solid #528ee6;
+    animation: rotating 1.2s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+@keyframes rotating {
+  100% {
+    transform: rotate(360deg);
+  }
+}

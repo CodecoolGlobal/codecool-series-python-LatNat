@@ -55,6 +55,11 @@ def get_first_hundred_actors():
     return render_template('actors.html', actors=actors)
 
 
+@app.route('/test')
+def test():
+    return render_template('loading.html')
+
+
 @app.template_filter('convert_runtime')
 def convert_runtime(runtime):
     if runtime < 60:
