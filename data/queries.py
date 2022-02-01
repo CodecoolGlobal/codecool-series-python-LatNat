@@ -75,9 +75,9 @@ def get_show_by_id(show_id):
             ORDER BY sc.id
             FETCH FIRST 3 ROWS ONLY
             ) as stars on stars.show_id = shows.id  -- first 3 actors ordered by id grouped by show --
-        GROUP BY shows.id, shows.title, shows.runtime, shows.rating, genre_info.genres, shows.overview, shows.trailer
-        ORDER BY rating DESC;
-            '''
+        WHERE shows.id = %(show_id)s
+        GROUP BY shows.id, shows.title, shows.runtime, shows.rating, genre_info.genres, shows.overview, shows.trailer;
+        '''
     return data_manager.execute_select(query, variables={'show_id': show_id}, fetchall=False)
 
 

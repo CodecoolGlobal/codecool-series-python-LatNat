@@ -9,7 +9,7 @@
     <div class="card detailed-view">
         <p>Details:</p>
         <div class="row">
-            <img src="#" alt="{{ show['title'] }} poster" class="poster col col-third">
+            <img src="#" alt="{{ show['title'] }}" class="poster col col-third">
             <div class="col col-twothird">
                 <h2>{{ show['title'] }}<span class="separator"> </span>{{ show['rating'] }} ★</h2>
                 <p class="small grayed">{{ show['runtime']|convert_runtime }}<span class="separator">|</span>{{ show['genres'] }}</p>
@@ -63,4 +63,5 @@
             {% endif %}
         </div>
     </div>
+    <script>displayShowPoster()</script>
 {% endblock %}
