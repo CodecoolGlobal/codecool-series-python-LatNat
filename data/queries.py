@@ -108,3 +108,18 @@ def get_actors():
         LIMIT 100;
     '''
     return data_manager.execute_select(query)
+
+
+def get_ratings():
+    query = '''
+        SELECT title, to_char(round((rating - avg), 2), 'SG0.99') as diff, count(a.name) as actor_count FROM shows
+        JOIN show_characters sc on shows.id = sc.show_id
+        JOIN actors a on a.id = sc.actor_id
+        CROSS JOIN (
+            SELECT avg(rating) as avg from shows
+            ) as all_ratings
+        GROUP BY title, rating, all_ratings.avg
+        ORDER BY actor_count DESC
+        FETCH FIRST 5 ROWS ONLY
+    '''
+    return data_manager.execute_select(query)

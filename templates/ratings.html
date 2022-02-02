@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block page_title %}
+    Ratings
+{% endblock %}
+
+{% block breadcrumbs %}
+    <span class="separator">></span>
+    <a>Ratings</a>
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Difference from average</th>
+            </tr>
+            <tbody>
+            {% for show in shows %}
+                <tr>
+                    <td>{{ show.title }}</td><td>{{ show.diff }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

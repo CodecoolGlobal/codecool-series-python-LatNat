@@ -55,9 +55,10 @@ def get_first_hundred_actors():
     return render_template('actors.html', actors=actors)
 
 
-@app.route('/test')
-def test():
-    return render_template('loading.html')
+@app.route('/ratings')
+def ratings():
+    shows = queries.get_ratings()
+    return render_template('ratings.html', shows=shows)
 
 
 @app.template_filter('convert_runtime')
