@@ -135,7 +135,9 @@ def get_ordered_ratings(order):
 
 
 def get_all_genres():
-    return data_manager.execute_select('''SELECT * FROM genres''')
+    return data_manager.execute_select('''SELECT DISTINCT genres.id, name from genres
+INNER JOIN show_genres sg on genres.id = sg.genre_id
+ORDER BY name;''')
 
 
 def get_actors_to_filter():
