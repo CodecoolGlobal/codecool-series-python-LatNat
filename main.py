@@ -61,6 +61,16 @@ def ratings():
     return render_template('ratings.html', shows=shows)
 
 
+@app.route('/ordered-shows')
+def ordered_shows():
+    if request.args:
+        order = request.args['order']
+    else:
+        order = 'DESC'
+    shows = queries.get_ordered_ratings(order)
+    return render_template('ordered_shows.html', shows=shows, direction=order)
+
+
 @app.template_filter('convert_runtime')
 def convert_runtime(runtime):
     if runtime < 60:

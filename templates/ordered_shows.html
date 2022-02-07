@@ -1,25 +1,25 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
+
 
 {% block page_title %}
-    Ratings
+    Ordered shows
 {% endblock %}
 
 {% block breadcrumbs %}
     <span class="separator">></span>
-    <a>Ratings</a>
+    <a>Ordered shows</a>
 {% endblock %}
 
 {% block content %}
-    <div class="card text-center">
-        <table>
+    <div class="card">
+        <table class="text-center">
             <tr>
-                <th>Title</th>
-                <th>Difference from average</th>
+                <th><a href="{{ url_for('ordered_shows', order=direction|flip_direction) }}">Title</a></th><th>Rating</th>
             </tr>
             <tbody>
             {% for show in shows %}
                 <tr>
-                    <td>{{ show.title }}</td><td>{{ show.diff }}</td>
+                    <td>{{ show.title }}</td><td>{{ (show.rating | int) * ' * ' }}</td>
                 </tr>
             {% endfor %}
             </tbody>

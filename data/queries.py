@@ -3,7 +3,6 @@ from psycopg2 import sql
 
 
 def get_shows(category, order):
-    print('inside queries:', category, order)
     query = sql.SQL('''
         SELECT
             shows.id,
@@ -123,3 +122,13 @@ def get_ratings():
         FETCH FIRST 5 ROWS ONLY
     '''
     return data_manager.execute_select(query)
+
+
+def get_ordered_ratings(order):
+    query = sql.SQL('''
+        SELECT title, (round(rating)) AS rating FROM shows
+        ORDER BY shows.rating {order}
+        FETCH FIRST 10 ROWS ONLY;''')
+    return data_manager.execute_select(query.format(
+        order=sql.SQL(order)
+    ))
