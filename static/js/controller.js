@@ -32,3 +32,14 @@ function buildTableFromResponse(response) {
 
 
 selectionEventHandler();
+window.onload = async function(){
+    let response = await dataHandler.getActorsByGenre(1)
+    let tBody = document.querySelector("tbody");
+    for (let data of response) {
+        let tableRow = document.createElement("tr");
+        let tableCell = document.createElement("td");
+        tableCell.innerText = data.name;
+        tableRow.appendChild(tableCell);
+        tBody.appendChild(tableRow)
+    }
+}
