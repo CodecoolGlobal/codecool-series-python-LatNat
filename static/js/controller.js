@@ -31,6 +31,27 @@ function buildTableFromResponse(response) {
 }
 
 
+function filterByName() {
+    console.log('hi')
+    let nameInput = document.getElementById("name");
+    let actors = document.querySelectorAll("tbody td");
+    for (let actor of actors) {
+        if (actor.innerText.search(nameInput.value) === -1) {
+            actor.style.display = 'none';
+        } else {
+            actor.style.display = '';
+        }
+    }
+}
+
+
+function inputEventHandler() {
+    const input = document.getElementById("name");
+    input.addEventListener("keyup", filterByName)
+}
+
+
+inputEventHandler();
 selectionEventHandler();
 window.onload = async function(){
     clearTable();
