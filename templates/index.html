@@ -20,6 +20,7 @@
         <p>Click <a href="{{ url_for('get_first_hundred_actors') }}">here</a> to see the first 50 actors first names and shows</p>
         <p>Click <a href="{{ url_for('ratings') }}">here</a> to see the first five shows, ordered by actor count(desc)</p>
         <p>Click <a href="{{ url_for('ordered_shows') }}">here</a> to see ordered shows (first/last 10)</p>
+        <script>dataHandler.getGenres()</script>
     </div>
 {% endblock %}
 

@@ -132,3 +132,33 @@ def get_ordered_ratings(order):
     return data_manager.execute_select(query.format(
         order=sql.SQL(order)
     ))
+
+
+def get_all_genres():
+    return data_manager.execute_select('''SELECT name FROM genres''')
+
+
+def get_actors_to_filter():
+    query = '''
+        SELECT array_agg(actors.name), g.name from actors
+        JOIN show_characters sc on actors.id = sc.actor_id
+        JOIN shows s on sc.show_id = s.id
+        JOIN show_genres sg on s.id = sg.show_id
+        JOIN genres g on sg.genre_id = g.id
+        GROUP BY g.name'''
+    return data_manager.execute_select(query)
+
+
+def get_actors_by_genre(genre):
+    query = sql.SQL('''
+        SELECT actors.name from actors
+        JOIN show_characters sc on actors.id = sc.actor_id
+        JOIN shows s on sc.show_id = s.id
+        JOIN show_genres sg on s.id = sg.show_id
+        JOIN genres g on sg.genre_id = g.id
+        WHERE g.name = {genre}
+        FETCH FIRST 20 ROWS ONLY;
+        ''')
+    return data_manager.execute_select(query.format(
+        genre=sql.Literal(genre)
+    ))

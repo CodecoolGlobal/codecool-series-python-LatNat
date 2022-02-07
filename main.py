@@ -1,7 +1,8 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect, jsonify
 from data import queries
 import math
 from dotenv import load_dotenv
+from util import json_response
 
 load_dotenv()
 app = Flask('codecool_series')
@@ -69,6 +70,24 @@ def ordered_shows():
         order = 'DESC'
     shows = queries.get_ordered_ratings(order)
     return render_template('ordered_shows.html', shows=shows, direction=order)
+
+
+@app.route('/api/genres', methods=['GET'])
+@json_response
+def get_all_genres():
+    return queries.get_all_genres()
+
+
+@app.route('/api/actors/<string:genre>', methods=['GET'])
+@json_response
+def filter_actors_by_genre(genre):
+    return queries.get_actors_by_genre(genre)
+
+
+@app.route('/filter-actors')
+def filter_actors():
+    genres = queries.get_all_genres()
+    return render_template('filter.html', genres=genres)
 
 
 @app.template_filter('convert_runtime')
