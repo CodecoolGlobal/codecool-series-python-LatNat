@@ -15,7 +15,7 @@
             <label for="genre">Choose a genre: </label>
             <select name="genre" id="genre" form="genre-form">
                 {% for genre in genres %}
-                    <option value="{{ genre.name }}">{{ genre.name }}</option>
+                    <option value="{{ genre.id }}">{{ genre.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -33,5 +33,4 @@
             </tbody>
         </table>
     </div>
-    <script type="module" src="{{ url_for('static', filename='js/controller.js') }}"></script>
 {% endblock %}

@@ -135,7 +135,7 @@ def get_ordered_ratings(order):
 
 
 def get_all_genres():
-    return data_manager.execute_select('''SELECT name FROM genres''')
+    return data_manager.execute_select('''SELECT * FROM genres''')
 
 
 def get_actors_to_filter():
@@ -156,7 +156,7 @@ def get_actors_by_genre(genre):
         JOIN shows s on sc.show_id = s.id
         JOIN show_genres sg on s.id = sg.show_id
         JOIN genres g on sg.genre_id = g.id
-        WHERE g.name = {genre}
+        WHERE g.id = {genre}
         FETCH FIRST 20 ROWS ONLY;
         ''')
     return data_manager.execute_select(query.format(
