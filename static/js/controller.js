@@ -36,7 +36,7 @@ function filterByName() {
     let nameInput = document.getElementById("name");
     let actors = document.querySelectorAll("tbody td");
     for (let actor of actors) {
-        if (actor.innerText.search(nameInput.value) === -1) {
+        if (actor.innerText.toUpperCase().search(nameInput.value.toUpperCase()) === -1) {
             actor.style.display = 'none';
         } else {
             actor.style.display = '';

@@ -12,7 +12,7 @@
 {% block content %}
     <div class="card row">
         <div class="col col-third">
-            <label for="genre">Choose a genre: </label>
+            <label for="genre" class="form-element-label">Choose a genre: </label>
             <select name="genre" id="genre" form="genre-form">
                 {% for genre in genres %}
                     <option value="{{ genre.id }}">{{ genre.name }}</option>
@@ -20,7 +20,7 @@
             </select>
         </div>
         <div class="col col-third">
-            <label for="name">Filter by name: </label>
+            <label for="name" class="form-element-label">Filter by name: </label>
             <input type="text" id="name" name="name">
         </div>
     </div>
