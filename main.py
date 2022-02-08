@@ -90,6 +90,12 @@ def filter_actors():
     return render_template('filter.html', genres=genres)
 
 
+@app.route('/birthday-actors')
+def birthday_actors():
+    actors = queries.get_alive_actors()
+    return render_template('birthday.html', actors=actors)
+
+
 @app.template_filter('convert_runtime')
 def convert_runtime(runtime):
     if runtime < 60:

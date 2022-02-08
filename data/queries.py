@@ -164,3 +164,12 @@ def get_actors_by_genre(genre):
     return data_manager.execute_select(query.format(
         genre=sql.Literal(genre)
     ))
+
+
+def get_alive_actors():
+    query = '''
+        SELECT name, birthday, extract(day from birthday) as day FROM actors
+        WHERE death IS NULL AND birthday IS NOT NULL
+        ORDER BY birthday
+        FETCH FIRST 100 ROWS ONLY;'''
+    return data_manager.execute_select(query)
