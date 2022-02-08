@@ -11,6 +11,7 @@ table {
 table th {
     color: #fff;
     background: #278bc4;
+    white-space: nowrap;
 }
 
 table th a {
