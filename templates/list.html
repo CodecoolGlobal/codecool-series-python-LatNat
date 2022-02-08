@@ -39,7 +39,7 @@
                     {% for key, value in show.items() %}
                         {% if key != 'id' %}
                             {% if key in ['trailer', 'homepage'] and value != 'No URL' %}
-                                <td><a>{{ value }}</a></td>
+                                <td><a href="{{ value }}">{{ key }}</a></td>
                             {% elif key == 'title' %}
                                 <td><a href="{{ url_for('get_show', show_id=show.id) }}">{{ value }}</a></td>
                             {% elif value == 'No URL' %}

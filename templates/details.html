@@ -58,9 +58,9 @@
             </div>
             {% if show['trailer'] != 'No URL' %}
                 <div class="col col-third">
-                <p>Trailer: </p>
-                <div id="player" class="trailer" data-video-id="{{ show['trailer'] | get_video_id }}"></div>
-                <script src="{{ url_for('static', filename='js/embed-youtube.js') }}" defer></script>
+                    <p>Trailer: </p>
+                    <div id="player" class="trailer" data-video-id="{{ show['trailer'] | get_video_id }}"></div>
+                    <script src="{{ url_for('static', filename='js/embed-youtube.js') }}" defer></script>
                 </div>
             {% endif %}
         </div>
