@@ -1,6 +1,7 @@
 .tooltip {
+    margin: 1em auto;
     position: relative;
-    margin-top: 1em;
+    cursor: context-menu;
 }
 
 .tooltip .tooltiptext {
