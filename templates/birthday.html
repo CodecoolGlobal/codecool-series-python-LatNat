@@ -13,7 +13,7 @@
     <div class="card text-center">
         {% for actor in actors %}
             <div class="tooltip">{{ actor.name }}
-                <span class="tooltiptext {{ 'green' if actor.day | int % 2 == 0 else 'gray' }}">{{ actor.birthday }}</span>
+                <span class="tooltiptext {{ 'green' if actor.day | is_even else 'gray' }}">{{ actor.birthday }}</span>
             </div>
         {% endfor %}
     </div>

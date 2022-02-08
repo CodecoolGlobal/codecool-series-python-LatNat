@@ -125,6 +125,10 @@ def flip_direction(direction):
     return 'ASC' if direction == 'DESC' else 'DESC'
 
 
+@app.template_filter('is_even')
+def is_even(number):
+    return int(number) % 2 == 0
+
 def main():
     app.run(debug=True)
 
