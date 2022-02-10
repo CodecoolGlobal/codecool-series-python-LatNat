@@ -13,7 +13,23 @@
                 <div class="loader"></div>
             </div>
             <div class="col col-twothird">
-                <h2>{{ show['title'] }}<span class="separator"> </span>{{ show['rating'] }} ★</h2>
+                <h2>{{ show['title'] }}<span class="separator"> </span>{{ show['rating'] }}
+                    <div class="stars-container">
+                        {% for star in range(0,(show['rating']|int//1)) %}
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        {% endfor %}
+                        {% if (show['rating'])|round(1) == (show['rating'])|round %}
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        {% elif (show['rating'])|round(1) > (show['rating'])|round %}
+                            <i class="fa fa-star-half-empty" aria-hidden="true"></i>
+                        {% else %}
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        {% endif %}
+                        {% for star in range((show['rating']|round|int), 10) %}
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        {% endfor %}
+                    </div>
+</h2>
                 <p class="small grayed">{{ show['runtime']|convert_runtime }}<span class="separator">|</span>{{ show['genres'] }}</p>
                 <p>{{ show['overview']}}</p>
             </div>
