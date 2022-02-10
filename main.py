@@ -40,7 +40,7 @@ def top_rated(page=1):
     shows = queries.get_top_rated(page, category, order)
     page_count = math.floor(queries.get_show_count()['count'] / 15)
     return render_template('list.html', shows=shows, page_count=page_count, current_page=int(page),
-                           order=category, direction=order)
+                           order=str(category), direction=str(order))
 
 
 @app.route('/show/<show_id>')

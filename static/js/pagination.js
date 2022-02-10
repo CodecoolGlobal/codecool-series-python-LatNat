@@ -16,37 +16,39 @@ function showOnlyFivePages(currentPage, pageCount) {
     return { lowerLimit: lowerLimit, upperLimit: upperLimit };
 }
 
-function createLinkForPage(pageNumber, totalNumOfPages) {
-    console.log('creating link...for', pageNumber)
+function createLinkForPage(pageNumber, totalNumOfPages, category, direction) {
     const pageLink = document.createElement('a');
     if (pageNumber < 1 || pageNumber > totalNumOfPages) {
         pageLink.href = "#";
     } else {
-        pageLink.href = `${pageNumber}`;
+        let pageUrl = new URL(`http://127.0.0.1:5000/shows/top-rated/${pageNumber}`);
+        pageUrl.searchParams.append('category', category);
+        pageUrl.searchParams.append('order', direction);
+        pageLink.href = pageUrl.href;
     }
     return pageLink
 }
 
 
 function clearElement(element) {
-    console.log('clearElement')
     while (element.hasChildNodes()) {
         element.lastChild.remove();
     }
 }
 
 function createPagination(currentPage, totalNumOfPages) {
-    console.log('createPagination');
+    const parameters = document.querySelector("input[type=hidden]");
+    const category = parameters.dataset.orderedBy;
+    const direction = parameters.dataset.direction;
     const paginationCard = document.querySelector('.pagination');
-    // clearElement(paginationCard);
-    const stepBackLink = createLinkForPage(currentPage-1, totalNumOfPages);
+    const stepBackLink = createLinkForPage(currentPage-1, totalNumOfPages, category, direction);
     stepBackLink.innerText = '«';
     paginationCard.appendChild(stepBackLink);
-    const stepForwardLink = createLinkForPage(currentPage+1, totalNumOfPages);
+    const stepForwardLink = createLinkForPage(currentPage+1, totalNumOfPages, category, direction);
     stepForwardLink.innerText = '»';
     const range = showOnlyFivePages(currentPage, totalNumOfPages);
     for (let i = range.lowerLimit; i <= range.upperLimit; i++) {
-        let pageLink = createLinkForPage(i, totalNumOfPages);
+        let pageLink = createLinkForPage(i, totalNumOfPages, category, direction);
         if (i === currentPage) {
             pageLink.className = "active";
         }
@@ -54,5 +56,4 @@ function createPagination(currentPage, totalNumOfPages) {
         paginationCard.appendChild(pageLink);
     }
     paginationCard.appendChild(stepForwardLink);
-    console.log(paginationCard);
 }

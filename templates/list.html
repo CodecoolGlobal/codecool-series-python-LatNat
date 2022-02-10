@@ -22,7 +22,7 @@
                 {% for key in shows[0] %}
                     {% if key != 'id' %}
                         <th>
-                            <a href="{{ url_for('all_shows', category=key, order=direction|flip_direction) if view_all else url_for('top_rated', category=key, order=direction|flip_direction) }}">
+                            <a href="{{ url_for('all_shows', category=key, order=direction|flip_direction) if view_all else url_for('top_rated', page=current_page, category=key, order=direction|flip_direction) }}">
                                 {{ key }}
                             {% if key == order %}
                                 {{ direction | convert_direction_to_arrow }}
@@ -56,8 +56,9 @@
     </div>
     {% if not view_all %}
         <div class="pagination text-center">
+        <input type="hidden" data-ordered-by="{{ order }}" data-direction="{{ direction }}">
             <script>
-                createPagination({{ current_page }}, {{ page_count }}, 'top_rated')
+                createPagination({{ current_page }}, {{ page_count }})
             </script>
         </div>
     {% endif %}

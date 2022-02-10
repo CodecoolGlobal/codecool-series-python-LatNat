@@ -29,7 +29,6 @@ table th,
 table td {
     margin: 0;
     padding: 6px;
-    white-space: nowrap;
 }
 
 table tr:nth-child(even) {
