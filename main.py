@@ -72,6 +72,17 @@ def ordered_shows():
     return render_template('ordered_shows.html', shows=shows, direction=order)
 
 
+@app.route('/fuzzy-search')
+def fuzzy_search():
+    return render_template('fuzzy.html')
+
+
+@app.route('/api/fuzzy-search/<string:name>')
+@json_response
+def get_fuzzy_results(name):
+    return queries.fuzzy(name)
+
+
 @app.route('/api/genres', methods=['GET'])
 @json_response
 def get_all_genres():
@@ -128,6 +139,7 @@ def flip_direction(direction):
 @app.template_filter('is_even')
 def is_even(number):
     return int(number) % 2 == 0
+
 
 def main():
     app.run(debug=True)

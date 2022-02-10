@@ -19,5 +19,9 @@ export let dataHandler = {
     let data = await apiGet(`/api/actors/${genre}`)
     console.log(data)
     return data
+  },
+  getFuzzySearchResults: async function (name) {
+    let data = await apiGet(`api/fuzzy-search/%${name}%`);
+    return data
   }
 }

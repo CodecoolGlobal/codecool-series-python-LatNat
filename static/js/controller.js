@@ -67,3 +67,14 @@ window.onload = async function(){
         tBody.appendChild(tableRow);
     }
 }
+
+/*
+import {dataHandler} from "./data_handler.js";
+
+const searchInput = document.getElementById("character-search");
+console.log(searchInput)
+searchInput.addEventListener("change", async () => {
+    let name = await searchInput.value
+    let data = await dataHandler.getFuzzySearchResults(name)
+    console.log(data)
+})*/

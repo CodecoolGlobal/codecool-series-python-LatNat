@@ -173,3 +173,14 @@ def get_alive_actors():
         ORDER BY birthday
         FETCH FIRST 100 ROWS ONLY;'''
     return data_manager.execute_select(query)
+
+
+def fuzzy(name):
+    query = sql.SQL('''
+        SELECT character_name, s.title, a.name FROM show_characters
+        JOIN actors a on a.id = show_characters.actor_id
+        JOIN shows s on show_characters.show_id = s.id
+        WHERE character_name LIKE {name}''')
+    return data_manager.execute_select(query.format(
+        name=sql.Literal(name)
+    ))
