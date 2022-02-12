@@ -3,25 +3,19 @@ async function apiGet(url) {
     method: "GET",
   });
   if (response.status === 200) {
-    let data = response.json();
-    return data;
+    return response.json();
   }
 }
 
 export let dataHandler = {
   getGenres: async function () {
-    let data = await apiGet("/api/genres");
-    console.log(data)
-    return data
+    return await apiGet("/api/genres");
   },
   getActorsByGenre: async function (genre) {
     console.log(`/api/actors/${genre}`)
-    let data = await apiGet(`/api/actors/${genre}`)
-    console.log(data)
-    return data
+    return await apiGet(`/api/actors/${genre}`)
   },
   getFuzzySearchResults: async function (name) {
-    let data = await apiGet(`api/fuzzy-search/%${name}%`);
-    return data
+    return await apiGet(`api/fuzzy-search/%${name}%`);
   }
 }
