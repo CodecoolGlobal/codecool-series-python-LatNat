@@ -1,5 +1,9 @@
 {% extends 'layout.html' %}
 
+{% block site_specific_head %}
+    <script type="module" src="{{ url_for('static', filename='js/filter.js') }}"></script>
+{% endblock %}
+
 {% block page_title %}
     Filter actors
 {% endblock %}

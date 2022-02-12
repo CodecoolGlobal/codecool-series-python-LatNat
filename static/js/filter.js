@@ -31,12 +31,10 @@ function buildTableFromResponse(response) {
 }
 
 
-function filterByName() {
-    console.log('hi')
-    let nameInput = document.getElementById("name");
+function filterByName(nameInput) {
     let actors = document.querySelectorAll("tbody td");
     for (let actor of actors) {
-        if (actor.innerText.toUpperCase().search(nameInput.value.toUpperCase()) === -1) {
+        if (actor.innerText.toUpperCase().search(nameInput.toUpperCase()) === -1) {
             actor.style.display = 'none';
         } else {
             actor.style.display = '';
@@ -47,34 +45,25 @@ function filterByName() {
 
 function inputEventHandler() {
     const input = document.getElementById("name");
-    input.addEventListener("keyup", filterByName)
+    if (input) {
+        input.addEventListener("keyup", () => filterByName(input.value));
+    }
 }
 
 
-inputEventHandler();
-selectionEventHandler();
 window.onload = async function(){
+    inputEventHandler();
+    selectionEventHandler();
     clearTable();
     const selection = await document.querySelector("select");
     console.log(selection)
     let response = await dataHandler.getActorsByGenre(selection.value)
-    let tBody = document.querySelector("tbody");
+    let actorsTable = document.querySelector("tbody");
     for (let data of response) {
         let tableRow = document.createElement("tr");
         let tableCell = document.createElement("td");
         tableCell.innerText = data.name;
         tableRow.appendChild(tableCell);
-        tBody.appendChild(tableRow);
+        actorsTable.appendChild(tableRow);
     }
 }
-
-/*
-import {dataHandler} from "./data_handler.js";
-
-const searchInput = document.getElementById("character-search");
-console.log(searchInput)
-searchInput.addEventListener("change", async () => {
-    let name = await searchInput.value
-    let data = await dataHandler.getFuzzySearchResults(name)
-    console.log(data)
-})*/

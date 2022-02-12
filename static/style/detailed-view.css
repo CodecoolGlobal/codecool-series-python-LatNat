@@ -4,7 +4,6 @@
 }
 
 
-
 .loader {
     border-radius: 50%;
     width: 64px;
@@ -14,9 +13,47 @@
     animation: rotating 1.2s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
+
 @keyframes rotating {
   100% {
     transform: rotate(360deg);
   }
 }
 
+
+
+.rating-star-container {
+    display: flex;
+    font-family: "FontAwesome", "sans-serif";
+}
+
+
+.rating-star:after {
+    content: '\f005';
+
+}
+
+.rating-star {
+    padding: 0.125em;
+}
+
+.is-selected {
+}
+
+.is-selected ~ .rating-star:after {
+    content: '\f006';
+}
+
+.rating-star.is-half:after {
+    content: '\f123';
+}
+
+.rating-star:hover:after {
+    content: '\f005';
+}
+
+.
+
+.rating-star:hover ~ .rating-star:after {
+    content: '\f006';
+}

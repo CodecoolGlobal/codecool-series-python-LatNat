@@ -1,5 +1,9 @@
 {% extends 'layout.html' %}
 
+{% block site_specific_head %}
+    <script type="module" src="{{ url_for('static', filename='js/fuzzy.js') }}"></script>
+{% endblock %}
+
 {% block content %}
     <div class="card">
     <label for="character-search">Character name:</label>

@@ -141,6 +141,17 @@ def is_even(number):
     return int(number) % 2 == 0
 
 
+@app.template_filter('round_to_closest')
+def round_to_closest(number, closest):
+    result = round(float(number)/closest, 0)*closest
+    return int(result) if result % 1 == 0 else result
+
+
+@app.template_filter('is_float')
+def is_float(number):
+    return isinstance(number, float)
+
+
 def main():
     app.run(debug=True)
 
