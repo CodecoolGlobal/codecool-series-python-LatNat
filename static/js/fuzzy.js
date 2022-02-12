@@ -21,10 +21,11 @@ function showResultsForFuzzySearch(results) {
 
 
 window.onload = async function() {
-    const searchInput = document.getElementById("character-search");
-    searchInput.addEventListener("change", async () => {
-    let name = searchInput.value.toUpperCase();
-    let response = await dataHandler.getFuzzySearchResults(name)
-    showResultsForFuzzySearch(response);
+    const searchButton = document.getElementById("search-button");
+    searchButton.addEventListener("click", async () => {
+        let searchInput = document.getElementById("character-search");
+        let name = searchInput.value.toUpperCase();
+        let response = await dataHandler.getFuzzySearchResults(name)
+        showResultsForFuzzySearch(response);
     })
 }
