@@ -14,19 +14,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="card row">
-        <div class="col col-third">
+    <div class="card">
             <label for="genre" class="form-element-label">Choose a genre: </label>
             <select name="genre" id="genre" form="genre-form">
                 {% for genre in genres %}
                     <option value="{{ genre.id }}">{{ genre.name }}</option>
                 {% endfor %}
             </select>
-        </div>
-        <div class="col col-third">
             <label for="name" class="form-element-label">Filter by name: </label>
             <input type="text" id="name" name="name">
-        </div>
     </div>
     <div class="card">
         <table>
