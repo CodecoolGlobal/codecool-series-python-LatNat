@@ -2,11 +2,29 @@ import {dataHandler} from "./data_handler.js";
 
 
 
+function clearElement(element) {
+    while (element.hasChildNodes()) {
+        element.lastChild.remove();
+    }
+}
+
+
+function showResultsForFuzzySearch(results) {
+    const resultsCard = document.getElementById("fuzzy-results");
+    clearElement(resultsCard)
+    for (let result of results) {
+        let resultRow = document.createElement("p");
+        resultRow.innerHTML = `${result.name} played <b>${result.character_name}</b> in ${result.title}`;
+        resultsCard.appendChild(resultRow)
+    }
+}
+
+
 window.onload = async function() {
     const searchInput = document.getElementById("character-search");
     searchInput.addEventListener("change", async () => {
     let name = searchInput.value.toUpperCase();
-    return await dataHandler.getFuzzySearchResults(name)
-})
-
+    let response = await dataHandler.getFuzzySearchResults(name)
+    showResultsForFuzzySearch(response);
+    })
 }

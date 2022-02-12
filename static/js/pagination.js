@@ -30,12 +30,6 @@ function createLinkForPage(pageNumber, totalNumOfPages, category, direction) {
 }
 
 
-function clearElement(element) {
-    while (element.hasChildNodes()) {
-        element.lastChild.remove();
-    }
-}
-
 function createPagination(currentPage, totalNumOfPages) {
     const parameters = document.querySelector("input[type=hidden]");
     const category = parameters.dataset.orderedBy;
