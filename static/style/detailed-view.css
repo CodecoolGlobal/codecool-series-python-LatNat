@@ -37,8 +37,11 @@
     padding: 0.125em;
 }
 
-.is-selected {
+
+.rating-star:hover ~ .rating-star:after {
+    content: '\f006';
 }
+
 
 .is-selected ~ .rating-star:after {
     content: '\f006';
@@ -52,8 +55,4 @@
     content: '\f005';
 }
 
-.
 
-.rating-star:hover ~ .rating-star:after {
-    content: '\f006';
-}
