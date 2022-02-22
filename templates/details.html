@@ -1,4 +1,9 @@
 {% extends 'layout.html' %}
+
+{% block site_specific_head %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/ratings.js') }}"></script>
+{% endblock %}
+
 {% block breadcrumbs %}
     <span class="separator">&gt;</span>
     <a href="{{ url_for('all_shows') }}">Shows</a>
@@ -20,6 +25,7 @@
                             {% set rating_condition = i + 1 == rounded_rating or i + 0.5 == rounded_rating %}
                             {% if rating_condition %}
                                 <div class="rating-star is-selected {{ 'is-half' if rounded_rating|is_float else '' }}"></div>
+                                <input id="original-rating" type="hidden" value="is-selected {{ 'is-half' if rounded_rating|is_float else '' }}">
                             {% else %}
                                 <div class="rating-star"></div>
                             {% endif %}
@@ -77,6 +83,6 @@
             {% endif %}
         </div>
     </div>
-
+    <script>ratingStarHover()</script>
     <script>displayShowPoster()</script>
 {% endblock %}

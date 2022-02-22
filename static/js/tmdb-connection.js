@@ -31,5 +31,5 @@ async function displayShowPoster() {
     const imageTag = createImageTag();
     imageTag.src = await getPosterUrl(show);
     container.replaceChild(imageTag, posterPlace);
-
 }
+

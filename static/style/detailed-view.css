@@ -30,7 +30,6 @@
 
 .rating-star:after {
     content: '\f005';
-
 }
 
 .rating-star {
@@ -54,5 +53,9 @@
 .rating-star:hover:after {
     content: '\f005';
 }
+/*
+.rating-star-container:hover .is-half:after {
+    content: '\f005';
+}*/
 
 
