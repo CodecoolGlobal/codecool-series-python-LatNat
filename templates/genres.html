@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <section>
+        <div class="card">
+            <div id="genre-list" class="genre-container">
+                {% for genre in genres %}
+                    <div class="genre" data-genre-id="{{ genre.id }}">{{ genre.name }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="table-container" class="card">
+            <h1>No genre selected</h1>
+        </div>
+    </section>
+    <script type="module" src="{{ url_for('static', filename='js/genre-details.js') }}"></script>
+{% endblock %}

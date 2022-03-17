@@ -76,3 +76,21 @@ a:hover {
 .clearfix:after {
     clear: both;
 }
+
+.genre-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.genre-container div {
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid orangered;
+    padding: 1rem;
+}
+
+.genre-container div:hover {
+    color: orangered;
+    transition: 0.3s ease-in;
+}
